@@ -1,0 +1,24 @@
+{
+  "cpuUsage": {
+    "user": 54947,
+    "system": 10989
+  },
+  "resourceUsage": {
+    "userCPUTime": 54972,
+    "systemCPUTime": 10994,
+    "maxRSS": 48040,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 4144,
+    "majorPageFault": 0,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 0,
+    "ipcSent": 0,
+    "ipcReceived": 0,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 33,
+    "involuntaryContextSwitches": 1
+  }
+}
