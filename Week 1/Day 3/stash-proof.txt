@@ -1,0 +1,1 @@
+stash@{0}: On release/v0.1: stash demo
