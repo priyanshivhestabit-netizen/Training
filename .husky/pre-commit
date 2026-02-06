@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running pre-commit checks..."
+
+# Block .env file
+if [ -f ".env" ]; then
+  echo ".env file detected. Commit blocked."
+  exit 1
+fi
+
+echo "Pre-commit checks passed"
