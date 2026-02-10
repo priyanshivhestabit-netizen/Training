@@ -58,6 +58,6 @@ This ensures the page remains usable on tablets and mobile devices.
 
 ## Output Comparison
 
-Below is the comparison between **reference image provided** (`right`) and **final output** (`left`):
+Below is the comparison between **final output** (`left`) and **reference image provided** (`right`) :
 
 ![Layout Comparison](comparison.png)
