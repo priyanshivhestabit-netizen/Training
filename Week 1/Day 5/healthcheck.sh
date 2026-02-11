@@ -13,5 +13,5 @@ do
     echo "[$TIMESTAMP] Server unreachable" >> $LOG_FILE
   fi
 
-  sleep 1
+  sleep 10
 done
