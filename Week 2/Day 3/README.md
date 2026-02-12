@@ -63,13 +63,13 @@ Implemented two behavioral approaches:
 - Clicking one section closes others
 - Achieved by looping through all accordion items and removing the active class
 
-![single_open](/Day%203/images/one_open.png)
+![single_open](images/one_open.png)
 
 #### Multiple Open Sections
 - Each section toggles independently
 - Only the clicked element’s state changes
 
-![multiple_open](/Day%203/images/multi_open.png)
+![multiple_open](images/multi_open.png)
 This helped in understanding how UI state is controlled using classes.
 
 
