@@ -1,0 +1,58 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    padding: 50px;
+}
+
+.accordian{
+    width: 500px;
+}
+
+.accordian-item{
+    background: rgb(98, 125, 234);
+    color: #ffffff;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    /* overflow: hidden; */
+}
+
+.accordian-h{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.accordian-c{
+    background: #ffffff;
+    color: #111111;
+    display: none;
+    padding: 15px;
+    border-radius: 1px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.accordian-item.active .accordian-c {
+    display: block;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.icon {
+    width: 30px;
+    height: 30px;
+    background: white;          
+    color: rgb(98, 125, 234);    
+    border-radius: 50%;        
+    
+    display: flex;              
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+    font-weight: bold;
+}
