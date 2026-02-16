@@ -116,7 +116,7 @@ body{
   }
 
   .controls input,
-  .controls select {
+  .controls select { 
     width: 100%;
   }
 }
