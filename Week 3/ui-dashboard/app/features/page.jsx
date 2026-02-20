@@ -44,7 +44,10 @@ export default function FeaturesPage() {
         {features.map((feature) => (
           <Card
             key={feature.title}
-            className="flex flex-col items-center text-center p-8"
+            className="flex flex-col items-center text-center p-8 transition-all duration-300 ease-out
+                        hover:scale-105
+                        hover:shadow-2xl
+                        "
           >
             <img
               src={feature.image}

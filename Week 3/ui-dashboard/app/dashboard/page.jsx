@@ -14,7 +14,11 @@ export default function DashboardPage() {
         ].map((item, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-md p-5"
+            className="bg-white rounded-xl shadow-md p-5
+                        transition-all duration-200 ease-out
+                        hover:shadow-2xl
+                        "
+
           >
             <p className="text-sm text-gray-500">{item.title}</p>
             <p className="text-2xl font-semibold mt-1">{item.value}</p>
@@ -25,7 +29,9 @@ export default function DashboardPage() {
       {/* Overview Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Welcome Card */}
-        <div className="bg-white rounded-xl shadow-md p-6">
+        <div className="bg-white rounded-xl shadow-md p-6 
+                        transition-all duration-200 ease-out
+                        hover:shadow-2xl">
           <h2 className="text-lg font-semibold mb-2">Welcome back!!!</h2>
           <p className="text-gray-600">
             Here’s what’s happening with your dashboard today.
@@ -38,7 +44,9 @@ export default function DashboardPage() {
         </div>
 
         {/* Quick Info */}
-        <div className="bg-white rounded-xl shadow-md p-6">
+        <div className="bg-white rounded-xl shadow-md p-6
+                        transition-all duration-200 ease-out
+                        hover:shadow-2xl">
           <h2 className="text-lg font-semibold mb-4">Quick Info</h2>
           <ul className="space-y-3 text-sm text-gray-600">
             <li>✔ New users signed up today: 24</li>
@@ -49,7 +57,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white rounded-xl shadow-md p-6
+                      transition-all duration-200 ease-out
+                      hover:shadow-2xl">
         <h2 className="text-lg font-semibold mb-4">Recent Activity</h2>
 
         <ul className="space-y-4 text-sm">

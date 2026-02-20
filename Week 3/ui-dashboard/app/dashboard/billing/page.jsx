@@ -4,7 +4,8 @@ export default function BillingPage() {
       <h1 className="text-2xl font-semibold">Billing</h1>
 
       {/* Current Plan */}
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white rounded-xl shadow-md p-6 transition-all duration-200 ease-out
+                        hover:shadow-xl">
         <h2 className="text-lg font-semibold mb-2">Current Plan</h2>
         <p className="text-gray-600 mb-4">
           You are currently on the <span className="font-medium">Pro Plan</span>
@@ -13,7 +14,8 @@ export default function BillingPage() {
       </div>
 
       {/* Payment Method */}
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white rounded-xl shadow-md p-6 transition-all duration-200 ease-out
+                        hover:shadow-xl">
         <h2 className="text-lg font-semibold mb-4">Payment Method</h2>
 
         <div className="flex justify-between items-center">
@@ -29,7 +31,8 @@ export default function BillingPage() {
       </div>
 
       {/* Billing History */}
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white rounded-xl shadow-md p-6 transition-all duration-200 ease-out
+                        hover:shadow-xl">
         <h2 className="text-lg font-semibold mb-4">Billing History</h2>
 
         <ul className="space-y-3 text-sm">

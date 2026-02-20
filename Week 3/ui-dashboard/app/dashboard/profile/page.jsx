@@ -4,7 +4,8 @@ export default function ProfilePage() {
       <h1 className="text-2xl font-bold">Profile</h1>
 
       {/* Card 1: Profile Summary */}
-      <div className="w-full bg-white rounded-xl p-6 flex items-center gap-6 shadow-md">
+      <div className="w-full bg-white rounded-xl p-6 flex items-center gap-6 shadow-md transition-all duration-200 ease-out
+                        hover:shadow-xl">
         <div className="w-20 h-20 rounded-full bg-teal-100 flex items-center justify-center text-2xl font-bold text-teal-600">
           PV
         </div>
@@ -23,7 +24,8 @@ export default function ProfilePage() {
       </div>
 
       {/* Card 2: Personal Information */}
-      <div className="w-full bg-white rounded-xl p-6 shadow-md">
+      <div className="w-full bg-white rounded-xl p-6 shadow-md transition-all duration-200 ease-out
+                        hover:shadow-xl">
 
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">
@@ -69,7 +71,8 @@ export default function ProfilePage() {
       </div>
 
       {/* Card 3: Address */}
-      <div className="w-full bg-white rounded-xl p-6 shadow-md">
+      <div className="w-full bg-white rounded-xl p-6 shadow-md transition-all duration-200 ease-out
+                        hover:shadow-xl">
 
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">
