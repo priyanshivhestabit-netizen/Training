@@ -6,6 +6,12 @@ const errorMiddleware = require("../middlewares/error.middleware");
 
 const seedRoutes = require("../routes/seed.routes");
 
+const productRoutes = require("../routes/product.routes");
+
+const userRoutes = require("../routes/user.routes");
+
+const securityMiddleware = require("../middlewares/security");
+
 function loadApp(){
     const app = express();
 
@@ -13,6 +19,7 @@ function loadApp(){
     app.use(express.json());
     logger.info("Middlewares loaded");
 
+    securityMiddleware(app);
     //routes
     app.get("/health",(req,res)=>{
         res.json({status:"OK"});
@@ -22,11 +29,16 @@ function loadApp(){
     app.get("/products", productController.getProducts);
     app.delete("/products/:id", productController.deleteProduct);   
     
+    
+
     if(process.env.NODE_ENV === "development"){
         app.use(seedRoutes);
+        app.use(productRoutes);
+        app.use(userRoutes);
     }
     app.use(errorMiddleware);
     logger.info("Routes mounted");
+    
     return app;
 }
 
