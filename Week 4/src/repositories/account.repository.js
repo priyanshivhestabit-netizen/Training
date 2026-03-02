@@ -1,8 +1,13 @@
 const Account = require("../models/Account");
 
-class AccountRepository{
+class AccountRepository {
+
     async create(data){
         return Account.create(data);
+    }
+
+    async findByEmail(email){
+        return Account.findOne({ email });
     }
 
     async findById(id){
@@ -14,6 +19,7 @@ class AccountRepository{
         if(status){
             query.status =status;
         }
+
         const skip = (page-1)*limit;
 
         const data = await Account.find(query)
@@ -38,8 +44,10 @@ class AccountRepository{
             runValidators: true
         });
     }
+
     async delete(id){
         return Account.findByIdAndDelete(id);
     }
 }
+
 module.exports = new AccountRepository();

@@ -9,8 +9,21 @@ const {
   idParamSchema
 } = require("../validations/product.validation");
 
+router.delete("/:id", async (req, res) => {
+  const product = await Product.findByIdAndUpdate(
+    req.params.id,
+    { deletedAt: new Date() },
+    { new: true }
+  );
+
+  if (!product) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+
+  res.json(product);
+});
 router.post(
-  "/products",
+  "/",
   validate(createProductSchema, "body"),
   async (req, res) => {
     const product = await Product.create(req.body);
@@ -19,7 +32,7 @@ router.post(
 );
 
 router.get(
-  "/products",
+  "/",
   validate(productQuerySchema, "query"),
   async (req, res) => {
 
