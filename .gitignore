@@ -2,3 +2,8 @@ node_modules/
 .env
 dist/
 build/
+
+# SSL certificates
+*.pem
+*-key.pem
+nginx/certs/*

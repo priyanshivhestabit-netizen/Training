@@ -18,3 +18,4 @@ HTTP requests redirected to HTTPS.
 
 Test URL:
 https://localhost/api
+
