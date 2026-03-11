@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+
+# Data
+src/data/raw/*
+src/data/processed/*
+!src/data/raw/.gitkeep
+!src/data/processed/.gitkeep
+
+# Logs
+src/logs/*
+!src/logs/.gitkeep
+
+# Models
+src/models/*
+!src/models/.gitkeep
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
