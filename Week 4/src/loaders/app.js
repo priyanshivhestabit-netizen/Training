@@ -15,7 +15,7 @@ function loadApp() {
   const app = express();
 
   // 🔹 1. Core middlewares
-  app.use(express.json());
+  app.use(express.json({ limit: "10kb" }));
   logger.info("JSON Middleware loaded");
 
   // 🔹 2. Security middlewares (Helmet, CORS, Rate limit)

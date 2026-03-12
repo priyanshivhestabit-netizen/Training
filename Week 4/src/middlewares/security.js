@@ -32,8 +32,8 @@ const securityMiddleware = (app) => {
     //prevent parameter pollution
     app.use(hpp());
 
-    //limit body size
-    app.use(express.json({limit:"10kb"}));
+    // //limit body size
+    // app.use(express.json({limit:"10kb"}));
 };
 
 module.exports = securityMiddleware;
