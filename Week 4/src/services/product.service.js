@@ -38,21 +38,28 @@ class ProductService{
             sortOptions[field] = direction ==="desc"?-1:1;
         }
 
-        const skip =(page-1)*limit;
+        const pageNum = Number(page) || 1;
+        const limitNum = Number(limit) || 10;
+
+        const skip = (pageNum - 1) * limitNum;
+
 
         const data = await productRepo.find(filter,{
             sort : sortOptions,
             skip,
-            limit: Number(limit),
+            limit: limitNum,
         });
 
         const total = await productRepo.count(filter);
 
+    //     console.log("PAGE:", page);
+    //    console.log("LIMIT:", limit);
+
         return{
             data,
             total,
-            page: Number(page),
-            limit: Number(limit),
+            page: pageNum,
+            limit: limitNum,
         };
     }
 

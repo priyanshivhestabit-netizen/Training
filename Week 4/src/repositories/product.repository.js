@@ -5,13 +5,22 @@ class ProductRepository {
         return Product.create(data);
     }
 
-    async find(filter,options){
-        return Product.find(filter)
-            .sort(options.sort)
-            .skip(options.skip)
-            .limit(options.limit);
-    }
+    async find(filter, options = {}) {
+    const {
+        sort = {},
+        skip = 0,
+        limit = 10
+    } = options;
 
+    console.log("LIMIT:", limit);
+    console.log("SKIP:", skip);
+
+    return Product.find(filter)
+        .sort(sort)
+        .skip(skip)
+        .limit(limit);
+}
+    
     async count(filter){
         return Product.countDocuments(filter);
     }
