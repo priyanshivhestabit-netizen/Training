@@ -142,10 +142,13 @@ export default function UsersPage() {
             <Input label="Department" defaultValue={selectedUser.department} />
 
             <div className="flex gap-3 pt-4">
-              <Button variant="secondary" onClick={() => setOpen(false)}>
+              <Button onClick={() => setOpen(false)}>
                 Cancel
               </Button>
               <Button>Save Changes</Button>
+            </div>
+            <div>
+              <Button>Delete User</Button>
             </div>
           </div>
         )}

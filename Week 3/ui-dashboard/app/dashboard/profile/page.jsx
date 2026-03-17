@@ -3,7 +3,7 @@ export default function ProfilePage() {
     <div className="w-full p-8 bg-gray-50 min-h-screen space-y-6">
       <h1 className="text-2xl font-bold">Profile</h1>
 
-      {/* Card 1: Profile Summary */}
+      {/* Profile Summary */}
       <div className="w-full bg-white rounded-xl p-6 flex items-center gap-6 shadow-md transition-all duration-200 ease-out
                         hover:shadow-xl">
         <div className="w-20 h-20 rounded-full bg-teal-100 flex items-center justify-center text-2xl font-bold text-teal-600">
@@ -23,7 +23,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Card 2: Personal Information */}
+      {/*  Personal Information */}
       <div className="w-full bg-white rounded-xl p-6 shadow-md transition-all duration-200 ease-out
                         hover:shadow-xl">
 
@@ -70,7 +70,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Card 3: Address */}
+      {/* Address */}
       <div className="w-full bg-white rounded-xl p-6 shadow-md transition-all duration-200 ease-out
                         hover:shadow-xl">
 
