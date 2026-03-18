@@ -12,7 +12,6 @@ const plans = [
       "Community support",
       "Single user",
     ],
-    highlight: false,
   },
   {
     name: "Pro",
@@ -24,7 +23,6 @@ const plans = [
       "Priority support",
       "Up to 5 users",
     ],
-    highlight: true,
   },
   {
     name: "Premium",
@@ -36,7 +34,6 @@ const plans = [
       "Advanced analytics",
       "Dedicated support",
     ],
-    highlight: false,
   },
 ];
 
@@ -86,11 +83,11 @@ export default function PricingPage() {
 
             <ul className="text-sm text-gray-600 space-y-3 mb-8">
               {plan.features.map((feature) => (
-                <li key={feature}>✔ {feature}</li>
+                <li key={feature}>{feature}</li>
               ))}
             </ul>
 
-            <Button className="w-full">
+            <Button >
               {plan.name === "Free"
                 ? "Get Started"
                 : "Upgrade Now"}

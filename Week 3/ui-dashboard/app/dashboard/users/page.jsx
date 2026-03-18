@@ -148,7 +148,7 @@ export default function UsersPage() {
               <Button>Save Changes</Button>
             </div>
             <div>
-              <Button>Delete User</Button>
+              <Button className="!bg-red-400 hover:!bg-red-600">Delete User</Button>
             </div>
           </div>
         )}
