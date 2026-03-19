@@ -1,61 +1,37 @@
 import pandas as pd
-import json
-from sklearn.feature_selection import mutual_info_classif
-from sklearn.feature_selection import RFE
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.feature_selection import mutual_info_classif, RFE
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import LabelEncoder
-from src.features.build_features import main
 
-def encode_remaining_categorical(X):
-
-    le = LabelEncoder()
-
-    for col in X.columns:
-        if X[col].dtype == "object" or str(X[col].dtype) == "category":
-            X[col] = le.fit_transform(X[col].astype(str))
-
-    return X
-
-def select_features():
-
-    X_train, X_test, y_train, y_test = main()
-
-    # encode categorical columns
-    X_train = encode_remaining_categorical(X_train)
-    X_test = encode_remaining_categorical(X_test)
-
-    # mutual information
-    mi = mutual_info_classif(X_train, y_train)
-
-    mi_scores = pd.Series(mi, index=X_train.columns)
-
-    top_features = mi_scores.sort_values(ascending=False).head(15).index
-
-    X_train = X_train[top_features]
-    X_test = X_test[top_features]
-
-    # RFE
-    model = RandomForestClassifier()
-
-    rfe = RFE(model,n_features_to_select=10)
-
-    rfe.fit(X_train,y_train)
-
-    selected = X_train.columns[rfe.support_]
-
-    return selected.tolist()
-
-def save_features(feature_list):
-
-    with open("features/feature_list.json","w") as f:
-        json.dump(feature_list,f,indent=4)
-
-def main_selector():
-
-    features = select_features()
-    save_features(features)
-    print("Selected Features:")
-    print(features)
+def select_features(X_train, y_train, top_n=15):
+    # Method 1: Correlation threshold
+    corr = X_train.corr().abs()
+    upper = corr.where(np.triu(np.ones(corr.shape), k=1).astype(bool))
+    to_drop_corr = [c for c in upper.columns if any(upper[c] > 0.9)]
+    print(f"High-corr columns to drop: {to_drop_corr}")
+    
+    # Method 2: Mutual information
+    mi = mutual_info_classif(X_train, y_train, random_state=42)
+    mi_series = pd.Series(mi, index=X_train.columns).sort_values(ascending=False)
+    
+    # Method 3: RFE with Random Forest
+    rf = RandomForestClassifier(n_estimators=50, random_state=42)
+    rfe = RFE(rf, n_features_to_select=top_n)
+    rfe.fit(X_train, y_train)
+    rfe_features = X_train.columns[rfe.support_].tolist()
+    
+    # Plot MI
+    mi_series.head(top_n).plot(kind="bar", figsize=(10,4))
+    plt.title("Top features by mutual information")
+    plt.tight_layout()
+    plt.savefig("src/logs/feature_importance.png")
+    plt.show()
+    
+    return rfe_features
 
 if __name__ == "__main__":
-    main_selector()
+    X_train = pd.read_csv("src/data/processed/X_train.csv")
+    y_train = pd.read_csv("src/data/processed/y_train.csv").squeeze()
+    selected = select_features(X_train, y_train)
+    print("Selected features:", selected)

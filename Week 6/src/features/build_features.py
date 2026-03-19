@@ -1,95 +1,64 @@
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from pathlib import Path
+import json, os
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-DATA_PATH = BASE_DIR/"src"/"data"/"processed"/"final.csv"
-
-def load_data():
-    df = pd.read_csv(DATA_PATH)
-    return df
-
-def create_features(df):
-
-    # 1. tenure_groups => customer duration bucket
-    df["tenure_group"] = pd.cut(
-        df["tenure"],
-        bins = [0,12,24,48,72],
-        labels = ["0-1yr","1-2yr","2-4yr","4-6yr"]
-    )
-
-    # 2. average monthly spend
-    df["avg_monthly_spend"] = df["TotalCharges"] / (df["tenure"] + 1)
-
-    # 3. change ratio
-    df["change_ratio"] = df["MonthlyCharges"] / (df["TotalCharges"] + 1)
-
-    # 4. long term customer
-    df["is_long_term"] = (df["tenure"] > 24).astype(int)
-
-    # 5. internet flag
-    df["has_internet"] = (df["InternetService"] != "No").astype(int)
-
-    # 6. automatic payment
-    df["auto_payment"] = df["PaymentMethod"].str.contains("automatic").astype(int)
-
-    # 7. senior flag
-    df["senior_flag"] = df["SeniorCitizen"]
-
-    # 8. family flag
-    df["family_customer"] = (
-        (df["Partner"] == "Yes") | (df["Dependents"] == "Yes")
-    ).astype(int)
-
-    # 9. service count
-    services = [
-        "PhoneService",
-        "InternetService"
-    ]
-
-    df["service_count"] = df[services].apply(
-        lambda x: (x!="No").sum(),axis=1
-    )
-
-    return df
-
-def encode_categorical(df):
-
-    cat_cols = df.select_dtypes(include="object").columns
-
-    le = LabelEncoder()
-
+def build_features(path="src/data/processed/final.csv"):
+    df = pd.read_csv(path)
+    
+    # ── New features (10+) ──────────────────────────────────────────
+    df["charges_per_month"] = df["TotalCharges"] / (df["tenure"] + 1)
+    df["is_long_tenure"] = (df["tenure"] > 24).astype(int)
+    df["is_high_monthly"] = (df["MonthlyCharges"] > df["MonthlyCharges"].median()).astype(int)
+    df["tenure_sq"] = df["tenure"] ** 2
+    df["charges_log"] = np.log1p(df["TotalCharges"])
+    df["monthly_log"] = np.log1p(df["MonthlyCharges"])
+    df["tenure_x_monthly"] = df["tenure"] * df["MonthlyCharges"]
+    
+    # Contract length numeric encoding
+    contract_map = {"Month-to-month": 1, "One year": 12, "Two year": 24}
+    df["contract_months"] = df["Contract"].map(contract_map)
+    
+    df["has_tech_support"] = (df["TechSupport"] == "Yes").astype(int)
+    df["has_online_security"] = (df["OnlineSecurity"] == "Yes").astype(int)
+    df["num_services"] = (df[["PhoneService","MultipleLines","InternetService",
+                               "OnlineSecurity","OnlineBackup","DeviceProtection",
+                               "TechSupport","StreamingTV","StreamingMovies"]] == "Yes").sum(axis=1)
+    
+    # ── Encode categoricals ─────────────────────────────────────────
+    cat_cols = df.select_dtypes(include="object").columns.tolist()
+    cat_cols = [c for c in cat_cols if c != "customerID"]
+    
     for col in cat_cols:
-        if(col!="customerID"):
-            df[col] = le.fit_transform(df[col].astype(str))
-    return df
-
-def split_data(df):
-
-    X = df.drop(["Churn","customerID"],axis=1)
+        le = LabelEncoder()
+        df[col] = le.fit_transform(df[col].astype(str))
+    
+    # ── Split ───────────────────────────────────────────────────────
+    df = df.drop(columns=["customerID"], errors="ignore")
+    X = df.drop("Churn", axis=1)
     y = df["Churn"]
-
-    return train_test_split(
-        X, y,
-        test_size=0.2,
-        random_state=42,
-        stratify=y
+    
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
     )
-
-def main():
-    df = load_data()
-    df = create_features(df)
-    df=encode_categorical(df)
-
-    X_train, X_test, y_train ,y_test = split_data(df)
-
-    print("Train shape:", X_train.shape)
-    print("Test shape:", X_test.shape)
-
-    return X_train, X_test, y_train, y_test
+    
+    scaler = StandardScaler()
+    X_train_sc = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns)
+    X_test_sc  = pd.DataFrame(scaler.transform(X_test),  columns=X_test.columns)
+    
+    # Save
+    os.makedirs("src/data/processed", exist_ok=True)
+    X_train_sc.to_csv("src/data/processed/X_train.csv", index=False)
+    X_test_sc.to_csv("src/data/processed/X_test.csv", index=False)
+    y_train.to_csv("src/data/processed/y_train.csv", index=False)
+    y_test.to_csv("src/data/processed/y_test.csv", index=False)
+    
+    with open("src/features/feature_list.json", "w") as f:
+        json.dump(list(X.columns), f, indent=2)
+    
+    print(f"Features saved. Train shape: {X_train_sc.shape}")
+    return X_train_sc, X_test_sc, y_train, y_test
 
 if __name__ == "__main__":
-    main()
-
+    build_features()

@@ -3,8 +3,8 @@ import numpy as np
 from pathlib import Path 
 from sklearn.preprocessing import StandardScaler
 
-RAW_PATH = "data/raw/telco_churn.csv"
-PROCESSED_PATH = "data/processed/final.csv"
+RAW_PATH = "src/data/raw/telco_churn.csv"
+PROCESSED_PATH = "src/data/processed/final.csv"
 
 def load_data():
     df = pd.read_csv(RAW_PATH)
