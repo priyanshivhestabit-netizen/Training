@@ -4,7 +4,7 @@ from sklearn.feature_selection import mutual_info_classif
 from sklearn.feature_selection import RFE
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
-from build_features import main
+from src.features.build_features import main
 
 def encode_remaining_categorical(X):
 

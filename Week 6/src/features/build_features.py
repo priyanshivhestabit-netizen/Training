@@ -2,8 +2,10 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+from pathlib import Path
 
-DATA_PATH = "data/processed/final.csv"
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DATA_PATH = BASE_DIR/"src"/"data"/"processed"/"final.csv"
 
 def load_data():
     df = pd.read_csv(DATA_PATH)
