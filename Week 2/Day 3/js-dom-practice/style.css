@@ -2,7 +2,6 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     background: #ffffff;
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     padding: 50px;
 }
@@ -16,7 +15,6 @@ body{
     color: #ffffff;
     margin-bottom: 10px;
     border-radius: 5px;
-    /* overflow: hidden; */
 }
 
 .accordian-h{
