@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.env/
+
+# Environment Variables
+.env
+.env.*
+
+# Jupyter / Notebooks-
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Vector DB / Embeddings
+*.faiss
+*.npy
+*.pkl
+
+# Model Files (LLMs / embeddings)
+models/
+*.bin
+*.pt
+*.onnx
+
+# Data Files (IMPORTANT)
+src/data/raw/*
+src/data/cleaned/*
+src/data/chunks/*
+src/data/embeddings/
+
+
+# Build / Cache
+.cache/
+dist/
+build/
+
+.vscode/
+.idea/
