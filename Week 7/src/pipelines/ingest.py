@@ -1,6 +1,7 @@
 import os
 import faiss
 import numpy as np
+import json
 
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -35,6 +36,19 @@ def load_documents(folder):
 
     return docs
 
+# SAVE CLEANED DATA
+def save_cleaned_data(documents):
+    os.makedirs("src/data/cleaned",exist_ok=True)
+    cleaned=[]
+    for doc in documents:
+        cleaned.append({
+            "text": doc.page_content,
+            "metadata": doc.metadata
+        })
+    with open("src/data/cleaned/cleaned.json","w") as f:
+        json.dump(cleaned,f,indent=2)
+    print(" Cleaned data saved")
+
 # CHUNK DOCUMENTS
 def chunk_documents(documents):
     splitter = RecursiveCharacterTextSplitter(
@@ -42,6 +56,24 @@ def chunk_documents(documents):
         chunk_overlap=100
     )
     return splitter.split_documents(documents)
+
+# SAVE CHUNKS
+def save_chunks(chunks):
+    os.makedirs("src/data/chunks",exist_ok=True)
+
+    chunk_data=[]
+    for i,doc in enumerate(chunks):
+        chunk_data.append({
+            "chunk_id":i,
+            "text": doc.page_content,
+            "metadata": doc.metadata
+        })
+    
+    with open("src/data/chunks/chunks.json","w") as f:
+        json.dump(chunk_data,f,indent=2)
+
+    print("Chunks saved")
+    
 
 # EMBEDDINGS
 model = SentenceTransformer("BAAI/bge-small-en")
@@ -88,9 +120,13 @@ def main():
     if len(docs) == 0:
         print("No documents found. Add files in src/data/raw/")
         return None
+    
+    save_cleaned_data(docs)
 
     chunks = chunk_documents(docs)
     print(f" Created chunks: {len(chunks)}")
+
+    save_chunks(chunks)
 
     texts = []
     metadata = []
