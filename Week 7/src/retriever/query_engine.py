@@ -1,39 +1,41 @@
-from src.pipelines.ingest import main as ingest_main, embed_texts
+import os
+from src.pipelines.ingest import main as ingest_main
+from src.vectorstore.faiss_store import FAISSStore
+from src.retriever.hybrid_retriever import HybridRetriever
+from src.retriever.reranker import rerank
 
+# class Retriever:
+#     def __init__(self, vectorstore):
+#         self.vectorstore = vectorstore
 
-class Retriever:
-    def __init__(self, vectorstore):
-        self.vectorstore = vectorstore
+#     def query(self, question, k=3):
+#         q_emb = embed_texts([question])
+#         results = self.vectorstore.search(q_emb, k)
 
-    def query(self, question, k=3):
-        q_emb = embed_texts([question])
-        results = self.vectorstore.search(q_emb, k)
+#         formatted = []
+#         for r in results:
+#             formatted.append({
+#                 "source": r["source"],
+#                 "chunk": r["chunk"],
+#                 "text": r["text"][:300]
+#             })
 
-        formatted = []
-        for r in results:
-            formatted.append({
-                "source": r["source"],
-                "chunk": r["chunk"],
-                "text": r["text"][:300]
-            })
-
-        return formatted
+#         return formatted
 
 
 def run():
     print("Building vector database...")
 
-    #Run ingestion
-    store = ingest_main()
-
-    if store is None:
-        print("No data found. Add files in src/data/raw/")
-        return
-
+    if os.path.exists("src/vectorstore/index.faiss"):
+        print("Loading existing vector DB...")
+        store = FAISSStore.load()
+    else:
+        print("No index found. Running ingestion...")
+        store = ingest_main()
     print("System ready! Ask your questions.\n")
 
     #Initialize retriever
-    retriever = Retriever(store)
+    retriever = HybridRetriever(store)
 
     #Input loop
     while True:
@@ -44,6 +46,8 @@ def run():
             break
 
         results = retriever.query(query)
+
+        results = rerank(query,results)
 
         print("\n Results:\n")
 

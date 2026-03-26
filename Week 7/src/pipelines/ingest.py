@@ -1,11 +1,10 @@
 import os
-import faiss
-import numpy as np
 import json
 
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from sentence_transformers import SentenceTransformer
+from src.embeddings.embedder import embed_texts
+from src.vectorstore.faiss_store import FAISSStore
 
 # LOAD DOCUMENTS
 
@@ -74,39 +73,6 @@ def save_chunks(chunks):
 
     print("Chunks saved")
     
-
-# EMBEDDINGS
-model = SentenceTransformer("BAAI/bge-small-en")
-
-def embed_texts(texts):
-    return model.encode(texts)
-
-# FAISS STORE
-class FAISSStore:
-    def __init__(self, dim):
-        self.index = faiss.IndexFlatL2(dim)
-        self.data = []
-
-    def add(self, embeddings, texts, metadata):
-        self.index.add(np.array(embeddings))
-
-        for t, m in zip(texts, metadata):
-            self.data.append({
-                "text": t,
-                "source": m["source"],
-                "chunk": m["chunk"]
-            })
-
-    def search(self, query_embedding, k=5):
-        D, I = self.index.search(query_embedding, k)
-
-        results = []
-        for idx in I[0]:
-            if idx < len(self.data):
-                results.append(self.data[idx])
-
-        return results
-
 # MAIN PIPELINE
 
 def main():
@@ -146,6 +112,7 @@ def main():
     store.add(embeddings, texts, metadata)
 
     print(" Stored in FAISS")
+    store.save()
     print(" INGESTION COMPLETE")
 
     return store
