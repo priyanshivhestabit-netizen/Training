@@ -1,7 +1,6 @@
 import pandas as pd 
 import numpy as np 
 from pathlib import Path 
-from sklearn.preprocessing import StandardScaler
 
 RAW_PATH = "src/data/raw/telco_churn.csv"
 PROCESSED_PATH = "src/data/processed/final.csv"
@@ -19,7 +18,7 @@ def clean_data(df):
     df["TotalCharges"] = pd.to_numeric(df["TotalCharges"],errors="coerce")
 
     # fill missing value
-    df["TotalCharges"].fillna(df["TotalCharges"].median())
+    df["TotalCharges"] = df["TotalCharges"].fillna(df["TotalCharges"].median())
 
     return df
 
