@@ -7,7 +7,7 @@ import json, os
 def build_features(path="src/data/processed/final.csv"):
     df = pd.read_csv(path)
     
-    # ── New features (10+) ──────────────────────────────────────────
+
     df["charges_per_month"] = df["TotalCharges"] / (df["tenure"] + 1)
     df["is_long_tenure"] = (df["tenure"] > 24).astype(int)
     df["is_high_monthly"] = (df["MonthlyCharges"] > df["MonthlyCharges"].median()).astype(int)
@@ -26,7 +26,7 @@ def build_features(path="src/data/processed/final.csv"):
                                "OnlineSecurity","OnlineBackup","DeviceProtection",
                                "TechSupport","StreamingTV","StreamingMovies"]] == "Yes").sum(axis=1)
     
-    # ── Encode categoricals ─────────────────────────────────────────
+   
     cat_cols = df.select_dtypes(include="object").columns.tolist()
     cat_cols = [c for c in cat_cols if c != "customerID"]
     
@@ -34,7 +34,6 @@ def build_features(path="src/data/processed/final.csv"):
         le = LabelEncoder()
         df[col] = le.fit_transform(df[col].astype(str))
     
-    # ── Split ───────────────────────────────────────────────────────
     df = df.drop(columns=["customerID"], errors="ignore")
     X = df.drop("Churn", axis=1)
     y = df["Churn"]
