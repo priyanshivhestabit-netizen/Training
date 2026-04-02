@@ -61,4 +61,3 @@ def load_images(folder):
  
     print(f"  Loaded {len(images)} images")
     return images
- 
