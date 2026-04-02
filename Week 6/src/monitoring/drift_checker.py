@@ -21,4 +21,4 @@ def check_drift(reference_path, new_path, threshold=0.05):
     return drift_report
 
 if __name__ == "__main__":
-    report = check_drift("data/processed/X_train.csv", "data/processed/X_test.csv") 
+    report = check_drift("src/data/processed/X_train.csv", "src/data/processed/X_test.csv") 
