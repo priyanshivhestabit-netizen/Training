@@ -1,7 +1,7 @@
 import sqlite3
 import ollama
 from src.utils.schema_loader import get_schema, get_sample_rows
-from src.generator.sql_generator import generate_sql, validate_sql
+from src.generator.sql_generator import generate_sql, validate_sql,summarize_results
 
 DB_PATH = "src/data/database/enterprise.db"
 

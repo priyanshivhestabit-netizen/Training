@@ -2,7 +2,6 @@ import ollama
 import re
 from src.prompts import get_sql_prompt, get_summarize_prompt
 
-
 def generate_sql(question, schema):
     prompt = get_sql_prompt(question, schema)
 
@@ -35,12 +34,9 @@ def validate_sql(sql):
     return True, "OK"
 
 
-def summarize_results(question, sql, columns, rows):
-    if not rows:
+def summarize_results(question, sql, result_text):
+    if not result_text or result_text=="No results found.":
         return "No data found for your query."
-
-    from src.pipelines.sql_pipeline import format_table
-    result_text = format_table(columns, rows)
     prompt = get_summarize_prompt(question, sql, result_text)
 
     response = ollama.chat(
