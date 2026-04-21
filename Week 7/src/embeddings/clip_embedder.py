@@ -1,7 +1,6 @@
 from transformers import CLIPProcessor, CLIPModel
 from PIL import Image
 import torch
-import numpy as np
 
 model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
@@ -26,7 +25,7 @@ def embed_image(image_path):
 
     features = _to_tensor(features)
     features = features / features.norm(dim=-1, keepdim=True)
-    return features.detach().cpu().numpy().reshape(-1).astype("float32")  # (512,)
+    return features.detach().cpu().numpy().reshape(-1).astype("float32")  
 
 
 def embed_text(text):
@@ -37,4 +36,4 @@ def embed_text(text):
 
     features = _to_tensor(features)
     features = features / features.norm(dim=-1, keepdim=True)
-    return features.detach().cpu().numpy().reshape(1, -1).astype("float32")  # (1, 512)
+    return features.detach().cpu().numpy().reshape(1, -1).astype("float32") 

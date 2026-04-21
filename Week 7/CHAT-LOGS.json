@@ -1,62 +1,62 @@
 [
   {
     "role": "user",
-    "content": "get the employees who earn less than 80000",
-    "timestamp": "2026-04-12 19:05:04",
-    "endpoint": "/ask-sql"
-  },
-  {
-    "role": "assistant",
-    "content": "The SQL query returned a list of three employees who earn less than $80,000. Specifically, Bob from Marketing with a salary of $70,000, Dave from HR with a salary of $60,000, and Eve also from Marketing with a salary of $75,000. It is evident that there are employees who earn below the specified threshold of $80,000 in this particular dataset.",
-    "timestamp": "2026-04-12 19:05:04",
-    "endpoint": "/ask-sql"
-  },
-  {
-    "role": "user",
-    "content": "what are companies policies",
-    "timestamp": "2026-04-12 19:07:35",
+    "content": "what is week 1 about",
+    "timestamp": "2026-04-14 19:45:22",
     "endpoint": "/ask"
   },
   {
     "role": "assistant",
-    "content": "The context does not provide specific details about the company's policies. However, it mentions that the company has measures to maintain the security and privacy of their information managed through systems and applications, which includes industry standard technologies, best practice security policies and procedures, and annual corporate employee training on data security and privacy. Additionally, there is a policy related to Workers\u2019 Compensation Costs mentioned in Item 7 of the 2022 Form 10-K.",
-    "timestamp": "2026-04-12 19:07:35",
+    "content": "The Week 1 is about Software Engineering Fundamentals.",
+    "timestamp": "2026-04-14 19:45:22",
     "endpoint": "/ask"
   },
   {
     "role": "user",
-    "content": "what is the onboarding process for new employee",
-    "timestamp": "2026-04-12 19:11:10",
+    "content": "what is there in week 1",
+    "timestamp": "2026-04-17 17:32:42",
     "endpoint": "/ask"
   },
   {
     "role": "assistant",
-    "content": "Based on the provided context, the onboarding process for a new employee includes the following steps:\n1. The company uses WebPayroll for the submission of payroll data.\n2. There are tools to manage the onboarding of new employees.",
-    "timestamp": "2026-04-12 19:11:10",
+    "content": "Based on the provided context, there is no information about Week 1 contents. The context only discusses financial statements and schedules of a company.",
+    "timestamp": "2026-04-17 17:32:42",
     "endpoint": "/ask"
   },
   {
     "role": "user",
-    "content": "can company's laptop be used for personal activities?",
-    "timestamp": "2026-04-12 19:15:40",
+    "content": "bar chart",
+    "timestamp": "2026-04-17 17:36:15",
+    "endpoint": "/ask-image"
+  },
+  {
+    "role": "assistant",
+    "content": "The provided text contains two bar charts.",
+    "timestamp": "2026-04-17 17:36:15",
+    "endpoint": "/ask-image"
+  },
+  {
+    "role": "user",
+    "content": "summarize the legal proceedings",
+    "timestamp": "2026-04-17 18:40:17",
     "endpoint": "/ask"
   },
   {
     "role": "assistant",
-    "content": "I don't have enough information to determine if the company allows employees to use their laptops for personal activities. The provided context focuses on data security and privacy concerns related to the company's services, but it does not mention any policies regarding personal laptop usage.",
-    "timestamp": "2026-04-12 19:15:40",
+    "content": "The provided context mentions one item related to Legal Proceedings (Item 3). However, it is incorporated by reference to Note 12 to the Consolidated Financial Statements, which discusses commitments and contingencies. Thus, there is no direct mention of the details of the legal proceedings in the provided context.",
+    "timestamp": "2026-04-17 18:40:17",
     "endpoint": "/ask"
   },
   {
     "role": "user",
-    "content": "what is peo industry ",
-    "timestamp": "2026-04-12 19:29:19",
-    "endpoint": "/ask"
+    "content": "[Image\u2192Image] uploaded image",
+    "timestamp": "2026-04-17 18:50:25",
+    "endpoint": "/ask-image"
   },
   {
     "role": "assistant",
-    "content": "The PEO Industry refers to Professional Employer Organizations, which began to evolve in the early 1980s as a response to the increasing legal and regulatory burdens on small and medium-sized employers. These organizations emerged to provide assistance with various tasks.",
-    "timestamp": "2026-04-12 19:29:19",
-    "endpoint": "/ask"
+    "content": "Found 3 similar images",
+    "timestamp": "2026-04-17 18:50:25",
+    "endpoint": "/ask-image"
   }
 ]

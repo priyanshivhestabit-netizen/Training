@@ -2,7 +2,6 @@ import streamlit as st
 import requests
 import tempfile
 import os
-from PIL import Image
 
 API_URL = "http://localhost:8000"
 
