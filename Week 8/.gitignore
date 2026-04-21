@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Virtual Environment
+venv/
+.env/
+.env.*
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Data (VERY IMPORTANT)
+data/
+*.csv
+*.jsonl
+*.parquet
+
+# Models (DON'T PUSH THESE)
+*.bin
+*.pt
+*.pth
+*.safetensors
+
+# HuggingFace / Transformers cache
+cache/
+.huggingface/
+transformers_cache/
+
+# Quantized Models
+quantized/
+*.gguf
+
+# Logs & Outputs
+logs/
+*.log
+outputs/
+results/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
