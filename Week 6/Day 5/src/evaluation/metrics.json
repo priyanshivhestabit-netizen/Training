@@ -1,0 +1,50 @@
+{
+  "LogisticRegression": {
+    "cv_accuracy_mean": 0.747,
+    "cv_f1_mean": 0.6008,
+    "cv_roc_auc_mean": 0.8473,
+    "test": {
+      "accuracy": 0.7523,
+      "precision": 0.4872,
+      "recall": 0.8208,
+      "f1": 0.6115,
+      "roc_auc": 0.8572
+    }
+  },
+  "RandomForest": {
+    "cv_accuracy_mean": 0.8058,
+    "cv_f1_mean": 0.5177,
+    "cv_roc_auc_mean": 0.821,
+    "test": {
+      "accuracy": 0.806,
+      "precision": 0.6409,
+      "recall": 0.4158,
+      "f1": 0.5043,
+      "roc_auc": 0.8309
+    }
+  },
+  "XGBoost": {
+    "cv_accuracy_mean": 0.7732,
+    "cv_f1_mean": 0.5552,
+    "cv_roc_auc_mean": 0.8135,
+    "test": {
+      "accuracy": 0.7728,
+      "precision": 0.5179,
+      "recall": 0.6237,
+      "f1": 0.5659,
+      "roc_auc": 0.8268
+    }
+  },
+  "NeuralNet": {
+    "cv_accuracy_mean": 0.7579,
+    "cv_f1_mean": 0.4903,
+    "cv_roc_auc_mean": 0.7563,
+    "test": {
+      "accuracy": 0.777,
+      "precision": 0.5339,
+      "recall": 0.4803,
+      "f1": 0.5057,
+      "roc_auc": 0.7788
+    }
+  }
+}
