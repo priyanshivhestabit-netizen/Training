@@ -1,0 +1,5 @@
+There has been a consistent increase in sales from January to June.
+'May' and 'June', which are the last two months of this data set have shown highest numbers for both customers and sales respectively indicating possible seasonality trend
+Despite increasing number of new monthly customers, average sale per customer has not remained constant. It seems like more expensive products or upsells may be happening.
+The company is growing at a steady rate as the total number of customers increases each month and sales are doing well too
+'June' stands out to have best performance in terms of both new customers reached, existing customer growth & overall sales

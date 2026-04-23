@@ -1,0 +1,5 @@
+Sales have been consistently increasing every month.
+'May' had the highest sales but not necessarily more customers as compared to 'April'.
+There is a positive correlation between number of customers and total/average sales each month.
+Despite having fewer customers in January, it was still able to generate significant revenue due to high product pricing or customer purchasing power.
+'June' showed the highest growth rate from previous months.
