@@ -14,7 +14,7 @@ If the task asks for CODE (e.g. 'write a function', 'give me code', 'implement X
 If the task is non-technical (strategy, planning, analysis):
 - Executive Summary
 - Key Findings  
-- Technical Recommendations
+- Recommendations
 - Action Plan
 - Risks & Mitigations"""
 
