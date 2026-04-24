@@ -166,29 +166,6 @@ logs/day1.log
 
 ---
 
-## Example Run
-
-**Input**
-
-```
-What is Agentic AI?
-```
-
-**Output**
-
-```
-Research Output:
-...
-
-Summary Output:
-...
-
-Final Output:
-...
-```
-
----
-
 ## Why This Design Matters
 
 Large AI systems use multiple smaller agents because:

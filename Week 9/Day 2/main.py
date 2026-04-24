@@ -46,15 +46,15 @@ def main():
     # STEP 2: PARALLEL WORKERS
     worker_outputs = []
 
-    with ThreadPoolExecutor(max_workers=3) as executor:
-        futures = []
+    with ThreadPoolExecutor(max_workers=3) as executor:  #threadpool with 3 workers
+        futures = [] 
 
         for i, task in enumerate(plan, start=1):
             worker = WorkerAgent(i)
             futures.append(executor.submit(worker.execute, task))
 
         for future in futures:
-            worker_outputs.append(future.result())
+            worker_outputs.append(future.result())  #waits for each worker to finish and store result
 
     print("\n[green]Worker Outputs[/green]")
 

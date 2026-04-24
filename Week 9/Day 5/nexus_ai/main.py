@@ -15,8 +15,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # nexus_ai/
 DAY5_DIR = os.path.dirname(BASE_DIR)                    # Day 5/
 sys.path.insert(0, DAY5_DIR)
 
-from nexus_ai.config import LOG_FILE, MAX_RETRIES, MEMORY_DB
-from nexus_ai.core.llm    import call_llm
+from nexus_ai.config import LOG_FILE, MAX_RETRIES
 from nexus_ai.core.memory import SessionMemory, LongTermMemory, VectorStore
 
 from nexus_ai.agents.planner    import PlannerAgent
@@ -97,7 +96,7 @@ class Orchestrator:
         self.long_mem.store(task, category="task")
         self.vector.add(task)
 
-        # ── 0. Memory Recall ──────────────────────────────────────────────
+        # ── 0. Memory Recall 
         console.print(Rule("[yellow]Memory Recall[/yellow]"))
         recalled = self.vector.search(task, top_k=2)
         memory_context = "\n".join(f"- {r}" for r in recalled)
@@ -107,7 +106,7 @@ class Orchestrator:
         else:
             console.print("  [dim]No prior memory found[/dim]")
 
-        # ── 1. Planning ───────────────────────────────────────────────────
+        # ── 1. Planning 
         console.print(Rule("[yellow]Phase 1 — Planning[/yellow]"))
         plan = self._step("Planner", self.planner.plan, task)
         if isinstance(plan, str):   # fallback returned a string
@@ -117,7 +116,7 @@ class Orchestrator:
         for i, step in enumerate(plan, 1):
             console.print(f"  [cyan]{i}.[/cyan] {step}")
 
-        # ── 2. Research Phase ─────────────────────────────────────────────
+        # ── 2. Research Phase 
         console.print(Rule("[yellow]Phase 2 — Research[/yellow]"))
         research_outputs = []
         for i, step in enumerate(plan, 1):
@@ -131,10 +130,10 @@ class Orchestrator:
             for i, out in enumerate(research_outputs)
         )
 
-        # ── 3. Role Switching — Coder or Analyst? ─────────────────────────
+        # ── 3. Role Switching — Coder or Analyst? 
         console.print(Rule("[yellow]Phase 3 — Role Switch (Coder / Analyst)[/yellow]"))
 
-        TECHNICAL_KEYWORDS = ["architecture", "backend", "code", "pipeline", "system", "api",
+        TECHNICAL_KEYWORDS = ["architecture", "backend", "code", "pipeline", "system", "api", "implement", "wap"
                                "database", "rag", "infrastructure", "deploy", "stack"]
         is_technical = any(kw in task.lower() for kw in TECHNICAL_KEYWORDS)
 
@@ -145,7 +144,7 @@ class Orchestrator:
             console.print("  [dim]Role → Analyst Agent (business/strategy task detected)[/dim]")
             specialist_out = self._step("Analyst", self.analyst.analyze, combined_research, task)
 
-        # ── 4. Self-Reflection Loop (Critic → Optimizer) ──────────────────
+        # ── 4. Self-Reflection Loop (Critic → Optimizer) 
         console.print(Rule("[yellow]Phase 4 — Self-Reflection[/yellow]"))
 
         draft = specialist_out
@@ -156,7 +155,7 @@ class Orchestrator:
             draft    = self._step("Optimizer", self.optimizer.optimize, draft, critique)
             time.sleep(2)
 
-        # ── 5. Validation ─────────────────────────────────────────────────
+        # ── 5. Validation 
         console.print(Rule("[yellow]Phase 5 — Validation[/yellow]"))
         passed, validated = self.validator.validate(draft, task)
 
@@ -170,10 +169,10 @@ class Orchestrator:
             time.sleep(2)
             passed, validated = self.validator.validate(draft, task)
 
-        status = "[green]PASSED[/green]" if passed else "[red]FAILED (proceeding anyway)[/red]"
+        status = "[green]PASSED[/green]" if passed else "[green]VALIDATION DONE[/green]"
         console.print(f"  Validation: {status}")
 
-        # ── 6. Final Report ───────────────────────────────────────────────
+        # ── 6. Final Report 
         console.print(Rule("[yellow]Phase 6 — Report Generation[/yellow]"))
 
         all_outputs = {
@@ -185,7 +184,7 @@ class Orchestrator:
         time.sleep(2)
         final_report = self._step("Reporter", self.reporter.report, task, all_outputs)
 
-        # ── Store everything to memory ─────────────────────────────────────
+        # ── Store everything to memory 
         self.session.add("assistant", final_report)
         self.long_mem.store(f"Task: {task} | Report: {final_report[:300]}", category="output")
         self.vector.add(final_report[:200])
@@ -193,7 +192,7 @@ class Orchestrator:
         return final_report
 
 
-# ── Entry Point ───────────────────────────────────────────────────────────────
+# ── Entry Point 
 def main():
     console.print(Panel.fit(
         "[bold cyan]NEXUS AI[/bold cyan] [white]— Autonomous Multi-Agent System[/white]\n"

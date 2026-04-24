@@ -5,7 +5,7 @@
 User Query
    ↓
 File Agent → Reads CSV
-Code Agent → Calculates insights
+Code Agent → Calculates insights and code
 DB Agent → Stores report
    ↓
 Final Output

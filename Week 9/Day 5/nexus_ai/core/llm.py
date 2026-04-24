@@ -1,6 +1,5 @@
 """
 Central LLM caller — Grok API (xAI) with retry + failure recovery.
-All agents use this — never call requests directly.
 """
 import time
 import logging

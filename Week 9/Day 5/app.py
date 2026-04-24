@@ -2,7 +2,7 @@ import streamlit as st
 import sys
 import os
 
-# ── Path setup ────────────────────────────────────────────────────────────────
+# ── Path setup 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
@@ -12,33 +12,33 @@ os.makedirs(os.path.join(BASE_DIR, "logs"), exist_ok=True)
 # Import Orchestrator directly from main.py — no duplicate logic
 from nexus_ai.main import Orchestrator
 
-# ── Page config ───────────────────────────────────────────────────────────────
+# ── Page config 
 st.set_page_config(
     page_title="NEXUS AI",
     page_icon="⚡",
     layout="centered"
 )
 
-st.title("⚡ NEXUS AI")
+st.title(" NEXUS AI")
 st.caption("Autonomous Multi-Agent System — powered by nexus_ai/main.py")
 
-# ── Load Orchestrator once (cached across reruns) ─────────────────────────────
+# ── Load Orchestrator once (cached across reruns) 
 @st.cache_resource
 def load_orchestrator():
     return Orchestrator()
 
 orchestrator = load_orchestrator()
 
-# ── Session state ─────────────────────────────────────────────────────────────
+# ── Session state 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# ── Show chat history ─────────────────────────────────────────────────────────
+# ── Show chat history 
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# ── Chat input ────────────────────────────────────────────────────────────────
+# ── Chat input 
 user_input = st.chat_input("Enter your task...")
 
 if user_input:
@@ -48,8 +48,6 @@ if user_input:
 
     with st.chat_message("assistant"):
         with st.spinner("Running pipeline..."):
-            # Uses the exact same orchestrator.run() as terminal main.py
-            # Logs go to Day5/logs/day5.log as configured in main.py
             response = orchestrator.run(user_input.strip())
         st.markdown(response)
 
